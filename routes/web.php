@@ -20,5 +20,7 @@ Auth::routes();
 Route::middleware('auth')->group(function() {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('blog', 'BlogController');
+    Route::post('blog/create', 'BlogController@store');
     Route::resource('admin/category', 'CategoryController');
 });
+Route::redirect('/admin', '/home', 301);

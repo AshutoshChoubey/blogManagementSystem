@@ -24,7 +24,7 @@
                 {!! session('message.content') !!}
               </div>
               @endif
-             <form method="POST" action="{{ url('/blog') }}" >
+             <form method="POST" action="{{ url('/blog/create') }}" enctype="multipart/form-data" >
                 @csrf
                 <div class="card">
                     <div class="card-header text-center">Add Your Blog</div>
@@ -33,7 +33,7 @@
                     
                       <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control @error('title') is-invalid @enderror"   id="title" name="title" aria-describedby="titleHelp" placeholder="Enter Title">
+                        <input type="text" class="form-control @error('title') is-invalid @enderror"   id="title" name="title" aria-describedby="titleHelp" value="{{ old('keywords', $keywords ?? '') }}" placeholder="Enter Title">
                         <small id="titleHelp" class="form-text text-muted">Please Enter Your Blog Title.</small>
                         @error('title')
                         <span class="invalid-feedback" role="alert">
@@ -47,6 +47,13 @@
                                     <label for="category">Category</label>
                                     <select class="form-control js-example-basic-single @error('category') is-invalid @enderror" id="category" name="category" >
                                         <option value="NA">NA</option>
+                                        @foreach ($categoryForSelect as $data)
+                                        <option value="{{$data->id}}"
+                                        @if ($data->id == old('category', $category ?? ''))
+                                          selected="selected"
+                                      @endif
+                                          >{{$data->categoryname}}</option>
+                                        @endforeach
                                     </select>
                                     @error('category')
                                     <span class="invalid-feedback" role="alert">
@@ -76,7 +83,7 @@
                      
                       <div class="form-group">
                         <label for="keywords">Keywords</label>
-                        <textarea  class="form-control @error('keywords') is-invalid @enderror" id="keywords" name="keywords" aria-describedby="keywordsHelp" placeholder="Enter Keyword"></textarea>
+                        <textarea  class="form-control @error('keywords') is-invalid @enderror" id="keywords" name="keywords" aria-describedby="keywordsHelp" placeholder="Enter Keyword">{{ old('keywords', $keywords ?? '') }}</textarea>
                         <small id="keywordsHelp" class="form-text text-muted">Please Enter Keyword Related to Blog Title.</small>
                         @error('keywords')
                                         <span class="invalid-feedback" role="alert">
@@ -86,7 +93,7 @@
                       </div>
                      <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea  class="form-control @error('description') is-invalid @enderror " id="description" name="description" aria-describedby="descriptionHelp" placeholder="Enter Your Blog Description"></textarea>
+                        <textarea  class="form-control @error('description') is-invalid @enderror " id="description" name="description" aria-describedby="descriptionHelp" placeholder="Enter Your Blog Description">{{ old('description', $description ?? '') }}</textarea>
                         <small id="descriptionHelp" class="form-text text-muted">Please Enter Your Blog Description.</small>
                          @error('description')
                          <span class="invalid-feedback" role="alert">

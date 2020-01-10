@@ -6,6 +6,7 @@ use App\blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 Use App\User;
+Use App\category;
 Use Illuminate\Support\Facades\Auth;
 
 
@@ -16,14 +17,19 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // $user=User::find(2);
+        $keyword = $request->get('search');
+        $perPage = 25;
+        $blog=[];
+        if (!empty($keyword)) {
+            $blog = blog::where('categoryname', 'LIKE', '%' .  $keyword . '%' )->orWhere ( 'categorydescription', 'LIKE', '%' .  $keyword . '%')->latest()->paginate($perPage);
+        } else {
+            $blog = blog::latest()->paginate($perPage);
+        }
+
+        return view('blog.index', compact('blog'));
        
-        // $user->roles()->attach(1);
-        // dd(Auth::user()->id);
-        // dd($user);
-        return view('addblog');
     }
 
     /**
@@ -33,7 +39,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        $categoryForSelect=category::all();
+        return view('addblog',['categoryForSelect' => $categoryForSelect]);
     }
 
     /**
@@ -53,43 +60,55 @@ class BlogController extends Controller
             'post' => 'required',
             'file' => 'required',
         ]);
+        $categoryForSelect=category::all();
 
         if ($validator->fails()) {
-            return redirect('blog')
-                        ->withErrors($validator)
-                        ->withInput();
+            // return view('addblog',['categoryForSelect' => $categoryForSelect])->withErrors($validator)
+            // ->withInput();
+            return redirect()->back()->withInput()->withErrors($validator);
+            // return redirect('blog/create')
+            //             ->withErrors($validator)
+            //             ->withInput();
         }
+        $photoName="";
+        $finalFileName="";
 
-        if ($request->file('photo')) {
-            $filenameWithExt = $request->file('photo')->getClientOriginalName();
-            $file = $request->file('photo');
+        if ($request->photo) {
+           
+            $filenameWithExt = $request->photo->getClientOriginalName();
+            $file = $request->photo;
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);          
-            $extension = $request->file('photo')->getClientOriginalExtension();
+            $extension = $request->photo->getClientOriginalExtension();
             $photoName = $filename.'_'.time().'.'.$extension; 
-                if (file_exists(public_path('/uploads/blogPhoto/',$photoName))) {
-                    return redirect('blog')
-                        ->withInput();
-                } else {
-                     $file->move(public_path('uploads/blogPhoto/'), $photoName);
+                if (!file_exists(public_path('/uploads/blogPhoto/',$photoName))) {
+                    // return redirect('blog/create')
+                    //     ->withInput();
+                    $file->move(public_path('uploads/blogPhoto/'), $photoName);
                 } 
+                // else {
+                //      $file->move(public_path('uploads/blogPhoto/'), $photoName);
+                // } 
             }
-            if ($request->file('file')) {
-                $filenameWithExt = $request->file('file')->getClientOriginalName();
-                $file = $request->file('file');
+            if ($request->file) {
+                $filenameWithExt = $request->file->getClientOriginalName();
+                $file = $request->file;
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);          
-                $extension = $request->file('file')->getClientOriginalExtension();
-                $photoName = $filename.'_'.time().'.'.$extension; 
-                    if (file_exists(public_path('/uploads/blogFile/',$photoName))) {
-                        return redirect('blog')
-                        ->withInput();
-                    } else {
-                         $file->move(public_path('uploads/blogFile/'), $photoName);
+                $extension = $request->file->getClientOriginalExtension();
+                $finalFileName = $filename.'_'.time().'.'.$extension; 
+                    if (!file_exists(public_path('/uploads/blogFile/',$finalFileName))) {
+                        $file->move(public_path('uploads/blogFile/'), $finalFileName);
+                        // return redirect('blog/create')
+                        // ->withInput();
                     } 
+                    // else {
+                    //      $file->move(public_path('uploads/blogFile/'), $finalFileName);
+                    // } 
                 }
-                $input = $request->except(['_token']);
+                $input = $request->except(['_token','photo','file']);
            
                 $blogObj = new Blog($input);
-        
+                $blogObj->photo=$photoName;
+                $blogObj->file=$finalFileName;
                 if($blogObj->save())
                 {
                     $request->session()->flash('message.level', 'success');
@@ -99,7 +118,8 @@ class BlogController extends Controller
                     $request->session()->flash('message.level', 'error');
                     $request->session()->flash('message.content', 'There are Some Issue!');
                 }
-                return redirect('blog')->withInput();
+                return view('addblog',['categoryForSelect' => $categoryForSelect])->with($request->all());
+                // return redirect('blog/create',['categoryForSelect' => $categoryForSelect])->withInput();
     
 
     }
@@ -144,8 +164,10 @@ class BlogController extends Controller
      * @param  \App\blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(blog $blog)
+    public function destroy($id)
     {
-        //
+        blog::destroy($id);
+
+        return redirect('/blog')->with('flash_message', 'Blog deleted!');
     }
 }

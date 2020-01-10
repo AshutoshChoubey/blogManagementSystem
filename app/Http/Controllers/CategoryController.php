@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 
 use App\category;
 use Illuminate\Http\Request;
@@ -19,9 +18,8 @@ class CategoryController extends Controller
     {
         $keyword = $request->get('search');
         $perPage = 25;
-
         if (!empty($keyword)) {
-            $categories = category::latest()->paginate($perPage);
+            $categories = category::where('categoryname', 'LIKE', '%' .  $keyword . '%' )->orWhere ( 'categorydescription', 'LIKE', '%' .  $keyword . '%')->latest()->paginate($perPage);
         } else {
             $categories = category::latest()->paginate($perPage);
         }

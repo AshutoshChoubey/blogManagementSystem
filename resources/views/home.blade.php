@@ -16,20 +16,20 @@
                     <div class="row">
                     @if(Auth::user()->user_type ==1 )
                 <div class="col-sm-4">
-                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
                         <div class="card-header">Manage Category</div>
                         <div class="card-body">
                             <h5 class="card-title">Create category</h5>
-                            <p class="card-text">If You want to manage Category Please<a href="{{ url('/blog/category')}}"> click Here</a> </p>
+                            <p class="card-text">If You want to manage Category Please<a href="{{ url('/admin/category')}}"> click Here</a> </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4">
                         <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
-                        <div class="card-header">Header</div>
+                        <div class="card-header">Blog Management System</div>
                         <div class="card-body">
-                            <h5 class="card-title">Secondary card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h5 class="card-title">Blog</h5>
+                            <p class="card-text">If you want to add blog then <a href="{{ url('/blog')}}">click here.</></p>
                         </div>
                         </div>
                         </div>
