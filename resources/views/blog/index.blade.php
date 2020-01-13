@@ -36,8 +36,9 @@
                                 <tbody>
                                 @foreach($blog as $item)
                                     <tr>
+                                    <?php $image_url = str_replace(' ', '%20', $item->photo); ?>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><img src="{{ asset('uploads/blogPhoto') }}/{{ $item->photo }}" alt="{{ $item->title }}" class="img-thumbnail"></td>
+                                        <td><img src="{{ asset('uploads/blogPhoto') }}/{{ $image_url }}" alt="{{ $item->title }}" class="img-thumbnail"></td>
                                         <td>{{ $item->title }}</td><td>{{str_limit($item->keywords, 50) }}</td><td>{{ $item->categoryname }}</td>
                                         <td>{{str_limit($item->description, 50) }}</td>
                                         <td>
