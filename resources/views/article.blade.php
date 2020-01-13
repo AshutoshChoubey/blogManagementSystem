@@ -27,8 +27,10 @@
         <div class="card">
             <div class="card-header"><h1>{{ $title }}</h1></div>
             <div class="card-body">
+           
                 @if(isset($photo))
-                <img src="{{ asset('uploads/blogPhoto') }}/{{ $photo }}" alt="{{ $title }}" class="img-thumbnail">
+                <?php $image_url = str_replace(' ', '%20', $photo); ?>
+                <img src="{{asset('uploads/blogPhoto')}}/{{ $image_url }}" alt="{{ $title }}" class="img-thumbnail">
                 @endif
                 {!! $post !!}
             </div>

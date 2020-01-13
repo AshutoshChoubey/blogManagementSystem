@@ -31,4 +31,4 @@ Route::redirect('/admin', '/home', 301);
 // {
 //     echo "ok";
 // });
-Route::get('/{slug}', 'BlogController@show');
+Route::get('/{slug}', 'BlogController@show')->middleware('blogMinify');
