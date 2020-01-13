@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 Use App\User;
 Use App\category;
 Use Illuminate\Support\Facades\Auth;
+Use DB; 
 
 
 class BlogController extends Controller
@@ -23,10 +24,15 @@ class BlogController extends Controller
         $perPage = 25;
         $blog=[];
         if (!empty($keyword)) {
-            $blog = blog::where('categoryname', 'LIKE', '%' .  $keyword . '%' )->orWhere ( 'categorydescription', 'LIKE', '%' .  $keyword . '%')->latest()->paginate($perPage);
+            $blog = DB::table('blogs')->join('categories', 'categories.id', '=', 'blogs.category')->select('categories.categoryname','blogs.*')->where('categoryname', 'LIKE', '%' .  $keyword . '%' )
+            ->orWhere ( 'title', 'LIKE', '%' .  $keyword . '%')
+            ->orWhere ( 'keywords', 'LIKE', '%' .  $keyword . '%')
+            ->where('blogs.deleted_at','=',null)
+            ->latest()->paginate($perPage); 
         } else {
-            $blog = blog::latest()->paginate($perPage);
+            $blog = DB::table('blogs')->join('categories', 'categories.id', '=', 'blogs.category')->select('categories.categoryname','blogs.*')->where('blogs.deleted_at','=',null)->latest()->paginate($perPage);
         }
+        // dd($blog->category);
 
         return view('blog.index', compact('blog'));
        
@@ -55,10 +61,10 @@ class BlogController extends Controller
             'title' => 'required|unique:blogs|max:255',
             'keywords' => 'required',
             'category' => 'required',
-            'photo' => 'required',
+            'photo' => 'mimes:jpg,jpeg,bmp,png,gif,svg|max:2048',
             'description' => 'required',
             'post' => 'required',
-            'file' => 'required',
+            // 'file' => 'required',
         ]);
         $categoryForSelect=category::all();
 
@@ -72,19 +78,21 @@ class BlogController extends Controller
         }
         $photoName="";
         $finalFileName="";
-
+        $input = $request->except(['_token','photo','file']);
+        $blogObj = new Blog($input);
         if ($request->photo) {
            
-            $filenameWithExt = $request->photo->getClientOriginalName();
-            $file = $request->photo;
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);          
-            $extension = $request->photo->getClientOriginalExtension();
-            $photoName = $filename.'_'.time().'.'.$extension; 
-                if (!file_exists(public_path('/uploads/blogPhoto/',$photoName))) {
+            $photoNmaeWithExt = $request->photo->getClientOriginalName();
+            $photo = $request->photo;
+            $photoName = pathinfo($photoNmaeWithExt, PATHINFO_FILENAME);          
+            $photoExtension = $request->photo->getClientOriginalExtension();
+            $finalPhotoName = $photoName.'_'.time().'.'.$photoExtension; 
+                // if (!file_exists(public_path('/uploads/blogPhoto/',$finalPhotoName))) {
                     // return redirect('blog/create')
                     //     ->withInput();
-                    $file->move(public_path('uploads/blogPhoto/'), $photoName);
-                } 
+                    $photo->move(public_path('uploads/blogPhoto/'), $finalPhotoName);
+                    $blogObj->photo=$finalPhotoName;
+                // } 
                 // else {
                 //      $file->move(public_path('uploads/blogPhoto/'), $photoName);
                 // } 
@@ -95,20 +103,23 @@ class BlogController extends Controller
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);          
                 $extension = $request->file->getClientOriginalExtension();
                 $finalFileName = $filename.'_'.time().'.'.$extension; 
-                    if (!file_exists(public_path('/uploads/blogFile/',$finalFileName))) {
+                    // if (!file_exists(public_path('/uploads/blogFile/',$finalFileName))) {
                         $file->move(public_path('uploads/blogFile/'), $finalFileName);
+                        $blogObj->file=$finalFileName;
                         // return redirect('blog/create')
                         // ->withInput();
-                    } 
+                    // } 
                     // else {
                     //      $file->move(public_path('uploads/blogFile/'), $finalFileName);
                     // } 
                 }
-                $input = $request->except(['_token','photo','file']);
+                
            
-                $blogObj = new Blog($input);
-                $blogObj->photo=$photoName;
-                $blogObj->file=$finalFileName;
+                
+               
+                
+                $blogObj->author=Auth::user()->name;
+                $blogObj->author_email=Auth::user()->email;
                 if($blogObj->save())
                 {
                     $request->session()->flash('message.level', 'success');
@@ -119,8 +130,6 @@ class BlogController extends Controller
                     $request->session()->flash('message.content', 'There are Some Issue!');
                 }
                 return view('addblog',['categoryForSelect' => $categoryForSelect])->with($request->all());
-                // return redirect('blog/create',['categoryForSelect' => $categoryForSelect])->withInput();
-    
 
     }
 
@@ -130,9 +139,11 @@ class BlogController extends Controller
      * @param  \App\blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(blog $blog)
+    public function show($slug)
     {
-        //
+        $article = blog::where('slug', $slug)->firstOrFail()->toArray();
+        $viewData['categoryName']=category::find($article['category'])->categoryname;
+        return view('article',$viewData)->with($article);
     }
 
     /**
@@ -141,9 +152,13 @@ class BlogController extends Controller
      * @param  \App\blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function edit(blog $blog)
+    public function edit($id)
     {
-        //
+        $blogDetails = blog::findOrFail($id)->toArray();
+        // $getFormAutoFillup = blog::whereId($id)->first()->toArray();
+        $categoryForSelect=category::all();
+        // dd($getFormAutoFillup);
+        return view('addblog',['categoryForSelect' => $categoryForSelect])->with($blogDetails);;
     }
 
     /**
@@ -153,9 +168,84 @@ class BlogController extends Controller
      * @param  \App\blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, blog $blog)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'keywords' => 'required',
+            'category' => 'required',
+            'photo' => 'mimes:jpg,jpeg,bmp,png,gif,svg|max:2048',
+            'description' => 'required',
+            'post' => 'required',
+            // 'file' => 'required',
+        ]);
+        $categoryForSelect=category::all();
+
+        if ($validator->fails()) {
+            // return view('addblog',['categoryForSelect' => $categoryForSelect])->withErrors($validator)
+            // ->withInput();
+            return redirect()->back()->withInput()->withErrors($validator);
+            // return redirect('blog/create')
+            //             ->withErrors($validator)
+            //             ->withInput();
+        }
+        $photoName="";
+        $finalFileName="";
+        $requestData = $request->except(['_token','photo','file']);
+        // $requestData = $request->all();
+        
+        $blogData = blog::findOrFail($request->id);
+        
+
+        if ($request->photo) {
+           
+            $photoNmaeWithExt = $request->photo->getClientOriginalName();
+            $photo = $request->photo;
+            $photoName = pathinfo($photoNmaeWithExt, PATHINFO_FILENAME);          
+            $photoExtension = $request->photo->getClientOriginalExtension();
+            $finalPhotoName = $photoName.'_'.time().'.'.$photoExtension; 
+                // if (!file_exists(public_path('/uploads/blogPhoto/',$finalPhotoName))) {
+                    // return redirect('blog/create')
+                    //     ->withInput();
+                    $photo->move(public_path('uploads/blogPhoto/'), $finalPhotoName);
+                    $requestData['photo']=$finalPhotoName;
+                // } 
+                // else {
+                //      $file->move(public_path('uploads/blogPhoto/'), $photoName);
+                // } 
+            }
+            if ($request->file) {
+                $filenameWithExt = $request->file->getClientOriginalName();
+                $file = $request->file;
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);          
+                $extension = $request->file->getClientOriginalExtension();
+                $finalFileName = $filename.'_'.time().'.'.$extension; 
+                    // if (!file_exists(public_path('/uploads/blogFile/',$finalFileName))) {
+                        $file->move(public_path('uploads/blogFile/'), $finalFileName);
+                        $requestData['file']=$finalFileName;
+                        // return redirect('blog/create')
+                        // ->withInput();
+                    // } 
+                    // else {
+                    //      $file->move(public_path('uploads/blogFile/'), $finalFileName);
+                    // } 
+                }
+               
+           
+             
+                
+                // $blogObj->author=Auth::user()->name;
+                // $blogObj->author_email=Auth::user()->email;
+                if($blogData->update($requestData))
+                {
+                    $request->session()->flash('message.level', 'success');
+                    $request->session()->flash('message.content', ' Updated Successfully!');
+                }
+                else{
+                    $request->session()->flash('message.level', 'error');
+                    $request->session()->flash('message.content', 'There are Some Issue!');
+                }
+                return redirect()->back();
     }
 
     /**

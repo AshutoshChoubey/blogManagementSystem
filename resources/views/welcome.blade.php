@@ -4,19 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Step by step simple sotution of your problem</title>
+        <title>{{ isset($title) ? $title:'' }}</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <style>
             html, body {
                 background-color: #fff;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
-                height: 100vh;
+                height: 100vh; 
                 margin: 0;
             }
 
@@ -62,27 +59,42 @@
                 margin-bottom: 30px;
             }
         </style>
+        @yield('head')
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: linear-gradient(#e6e2df,#ffffff,#e6e4e2 );">
+        <a class="navbar-brand" href="" style="color: black;"><span style="font-family: Vivaldi; font-size:larger; font-weight: bold;">Laravel</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                        <a href="{{ url('/blog') }}">Blog</a>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ url('/home') }}">Home</a>
+                    </li>
+                        @if(Auth::user()->user_type ==1 )
+                        <li class="nav-item ">
+                        <a class="nav-link" href="{{ url('/blog') }}">Blog</a>
+                        </li>
+                        @endif
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    </li>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                        <li class="nav-item ">
+                            <a  class="nav-link" href="{{ route('register') }}">Register</a>
+                        </li>
                         @endif
                     @endauth
-                </div>
-            @endif
-
-            <div class="content">
-               
-            </div>
+            </ul>
         </div>
+    </nav>
+            <div class="content">
+            @yield('content')
+            </div>
+        <!-- </div> -->
     </body>
+    @yield('foot')
 </html>

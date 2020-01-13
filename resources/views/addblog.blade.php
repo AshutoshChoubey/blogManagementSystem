@@ -4,6 +4,9 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 <div class="container">
     <div class="row justify-content-center">
+      <!-- <div class="col-sm-4"> -->
+      @include('admin.sidebar')
+      <!-- </div> -->
         <div class="col-md-8">
               @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible" role="alert">
@@ -24,8 +27,15 @@
                 {!! session('message.content') !!}
               </div>
               @endif
-             <form method="POST" action="{{ url('/blog/create') }}" enctype="multipart/form-data" >
-                @csrf
+              @if(isset($id))
+              <form method="post" action="{{ url('/blog') }}/{{$id}}" enctype="multipart/form-data" >
+              <input type="hidden" name="_method" value="PUT">
+              {{ Form::hidden('id', isset($id) ? $id :'', []) }} 
+              @else
+              <form method="POST" action="{{ url('/blog/create') }}" enctype="multipart/form-data" >
+              @endif
+            
+             {{ csrf_field() }}
                 <div class="card">
                     <div class="card-header text-center">Add Your Blog</div>
 
@@ -33,7 +43,7 @@
                     
                       <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control @error('title') is-invalid @enderror"   id="title" name="title" aria-describedby="titleHelp" value="{{ old('keywords', $keywords ?? '') }}" placeholder="Enter Title">
+                        <input type="text" class="form-control @error('title') is-invalid @enderror"   id="title" name="title" aria-describedby="titleHelp" value="{{ old('title', $title ?? '') }}" placeholder="Enter Title">
                         <small id="titleHelp" class="form-text text-muted">Please Enter Your Blog Title.</small>
                         @error('title')
                         <span class="invalid-feedback" role="alert">

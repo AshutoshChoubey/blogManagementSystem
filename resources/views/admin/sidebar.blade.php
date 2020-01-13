@@ -12,6 +12,30 @@
                     </a>
                 </li>
             </ul>
+                @if(Auth::user()->user_type ==1 )
+                <ul class="nav" role="tablist">
+                    <li role="presentation">
+                        <a href="{{ url('admin/category') }}">
+                            Category
+                        </a>
+                    </li>
+                </ul>
+                    <ul class="nav" role="tablist">
+                    <li role="presentation">
+                        <a href="{{ url('/blog') }}">
+                            Blog
+                        </a>
+                    </li>
+                    </ul>
+                    <ul class="nav" role="tablist">
+                    <li role="presentation">
+                        <a href="{{ url('/admin/user-type') }}">
+                            User Type
+                        </a>
+                    </li>
+                    </ul>
+                 @endif
+            </ul>
         </div>
     </div>
 </div>

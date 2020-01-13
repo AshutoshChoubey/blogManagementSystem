@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -46,6 +47,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'categoryname' => 'required|max:255',
+            'categorydescription' => 'required',
+        ]);
+        if ($validator->fails()) {
+            // return view('addblog',['categoryForSelect' => $categoryForSelect])->withErrors($validator)
+            // ->withInput();
+            return redirect()->back()->withInput()->withErrors($validator);
+            // return redirect('blog/create')
+            //             ->withErrors($validator)
+            //             ->withInput();
+        }
         
         $requestData = $request->all();
         
@@ -92,6 +105,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'categoryname' => 'required|max:255',
+            'categorydescription' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator)->withInput();
+        }
         
         $requestData = $request->all();
         

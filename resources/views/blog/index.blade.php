@@ -13,7 +13,7 @@
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 
-                        <form method="GET" action="{{ url('/admin/blog') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+                        <form method="GET" action="{{ url('/blog') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
                                 <span class="input-group-append">
@@ -38,12 +38,11 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td><img src="{{ asset('uploads/blogPhoto') }}/{{ $item->photo }}" alt="{{ $item->title }}" class="img-thumbnail"></td>
-                                        <td>{{ $item->title }}</td><td>{{ $item->keywords }}</td><td>{{ $item->category }}</td>
-                                        <td>{{ $item->descripition }}</td>
+                                        <td>{{ $item->title }}</td><td>{{str_limit($item->keywords, 50) }}</td><td>{{ $item->categoryname }}</td>
+                                        <td>{{str_limit($item->description, 50) }}</td>
                                         <td>
-                                            <a href="{{ url('/admin/blog/' . $item->id) }}" title="View blog"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/admin/blog/' . $item->id . '/edit') }}" title="Edit blog"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-
+                                            <a href="{{ url('/' . $item->slug) }}" title="View blog"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                            <a href="{{ url('/blog/' . $item->id . '/edit') }}" title="Edit blog"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                                             <form method="POST" action="{{ url('/blog' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}

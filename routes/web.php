@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,5 +24,11 @@ Route::middleware('auth')->group(function() {
     Route::resource('blog', 'BlogController');
     Route::post('blog/create', 'BlogController@store');
     Route::resource('admin/category', 'CategoryController');
+    Route::resource('admin/user-type', 'UserTypeController');
 });
 Route::redirect('/admin', '/home', 301);
+// Route::get('/article/about', function()
+// {
+//     echo "ok";
+// });
+Route::get('/{slug}', 'BlogController@show');

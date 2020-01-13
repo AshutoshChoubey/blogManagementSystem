@@ -16,11 +16,11 @@ class ComposerStaticInit779cc9c3ded962da78ad61d4fdd45ed8
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
-        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
@@ -80,6 +80,7 @@ class ComposerStaticInit779cc9c3ded962da78ad61d4fdd45ed8
         ),
         'R' => 
         array (
+            'RenatoMarinho\\LaravelPageSpeed\\' => 31,
             'Ramsey\\Uuid\\' => 12,
         ),
         'P' => 
@@ -148,8 +149,10 @@ class ComposerStaticInit779cc9c3ded962da78ad61d4fdd45ed8
         ),
         'C' => 
         array (
+            'Cviebrock\\EloquentSluggable\\' => 28,
             'Cron\\' => 5,
             'Collective\\Html\\' => 16,
+            'Cocur\\Slugify\\' => 14,
             'Carbon\\' => 7,
         ),
         'A' => 
@@ -277,6 +280,10 @@ class ComposerStaticInit779cc9c3ded962da78ad61d4fdd45ed8
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'RenatoMarinho\\LaravelPageSpeed\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -406,6 +413,10 @@ class ComposerStaticInit779cc9c3ded962da78ad61d4fdd45ed8
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
+        'Cviebrock\\EloquentSluggable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cviebrock/eloquent-sluggable/src',
+        ),
         'Cron\\' => 
         array (
             0 => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron',
@@ -413,6 +424,10 @@ class ComposerStaticInit779cc9c3ded962da78ad61d4fdd45ed8
         'Collective\\Html\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravelcollective/html/src',
+        ),
+        'Cocur\\Slugify\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cocur/slugify/src',
         ),
         'Carbon\\' => 
         array (
@@ -469,6 +484,7 @@ class ComposerStaticInit779cc9c3ded962da78ad61d4fdd45ed8
         'App\\Http\\Controllers\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoryController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\UserTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserTypeController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
@@ -484,6 +500,7 @@ class ComposerStaticInit779cc9c3ded962da78ad61d4fdd45ed8
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\UserType' => __DIR__ . '/../..' . '/app/UserType.php',
         'App\\blog' => __DIR__ . '/../..' . '/app/blog.php',
         'App\\category' => __DIR__ . '/../..' . '/app/category.php',
         'Appzcoder\\CrudGenerator\\Commands\\CrudApiCommand' => __DIR__ . '/..' . '/appzcoder/crud-generator/src/Commands/CrudApiCommand.php',
@@ -530,6 +547,27 @@ class ComposerStaticInit779cc9c3ded962da78ad61d4fdd45ed8
         'Carbon\\Traits\\Units' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Units.php',
         'Carbon\\Traits\\Week' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Week.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
+        'Cocur\\Slugify\\Bridge\\Laravel\\SlugifyFacade' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Laravel/SlugifyFacade.php',
+        'Cocur\\Slugify\\Bridge\\Laravel\\SlugifyServiceProvider' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Laravel/SlugifyServiceProvider.php',
+        'Cocur\\Slugify\\Bridge\\Latte\\SlugifyHelper' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Latte/SlugifyHelper.php',
+        'Cocur\\Slugify\\Bridge\\League\\SlugifyServiceProvider' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/League/SlugifyServiceProvider.php',
+        'Cocur\\Slugify\\Bridge\\Nette\\SlugifyExtension' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Nette/SlugifyExtension.php',
+        'Cocur\\Slugify\\Bridge\\Plum\\SlugifyConverter' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Plum/SlugifyConverter.php',
+        'Cocur\\Slugify\\Bridge\\Silex2\\SlugifyServiceProvider' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Silex2/SlugifyServiceProvider.php',
+        'Cocur\\Slugify\\Bridge\\Silex\\SlugifyServiceProvider' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Silex/SlugifyServiceProvider.php',
+        'Cocur\\Slugify\\Bridge\\Symfony\\CocurSlugifyBundle' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Symfony/CocurSlugifyBundle.php',
+        'Cocur\\Slugify\\Bridge\\Symfony\\CocurSlugifyExtension' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Symfony/CocurSlugifyExtension.php',
+        'Cocur\\Slugify\\Bridge\\Symfony\\Configuration' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Symfony/Configuration.php',
+        'Cocur\\Slugify\\Bridge\\Twig\\SlugifyExtension' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Twig/SlugifyExtension.php',
+        'Cocur\\Slugify\\Bridge\\ZF2\\Module' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/ZF2/Module.php',
+        'Cocur\\Slugify\\Bridge\\ZF2\\SlugifyService' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/ZF2/SlugifyService.php',
+        'Cocur\\Slugify\\Bridge\\ZF2\\SlugifyViewHelper' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/ZF2/SlugifyViewHelper.php',
+        'Cocur\\Slugify\\Bridge\\ZF2\\SlugifyViewHelperFactory' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/ZF2/SlugifyViewHelperFactory.php',
+        'Cocur\\Slugify\\RuleProvider\\DefaultRuleProvider' => __DIR__ . '/..' . '/cocur/slugify/src/RuleProvider/DefaultRuleProvider.php',
+        'Cocur\\Slugify\\RuleProvider\\FileRuleProvider' => __DIR__ . '/..' . '/cocur/slugify/src/RuleProvider/FileRuleProvider.php',
+        'Cocur\\Slugify\\RuleProvider\\RuleProviderInterface' => __DIR__ . '/..' . '/cocur/slugify/src/RuleProvider/RuleProviderInterface.php',
+        'Cocur\\Slugify\\Slugify' => __DIR__ . '/..' . '/cocur/slugify/src/Slugify.php',
+        'Cocur\\Slugify\\SlugifyInterface' => __DIR__ . '/..' . '/cocur/slugify/src/SlugifyInterface.php',
         'Collective\\Html\\Componentable' => __DIR__ . '/..' . '/laravelcollective/html/src/Componentable.php',
         'Collective\\Html\\Eloquent\\FormAccessible' => __DIR__ . '/..' . '/laravelcollective/html/src/Eloquent/FormAccessible.php',
         'Collective\\Html\\FormBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/FormBuilder.php',
@@ -547,6 +585,11 @@ class ComposerStaticInit779cc9c3ded962da78ad61d4fdd45ed8
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'CrudGeneratorTest' => __DIR__ . '/..' . '/appzcoder/crud-generator/tests/CrudGeneratorTest.php',
+        'Cviebrock\\EloquentSluggable\\ServiceProvider' => __DIR__ . '/..' . '/cviebrock/eloquent-sluggable/src/ServiceProvider.php',
+        'Cviebrock\\EloquentSluggable\\Services\\SlugService' => __DIR__ . '/..' . '/cviebrock/eloquent-sluggable/src/Services/SlugService.php',
+        'Cviebrock\\EloquentSluggable\\Sluggable' => __DIR__ . '/..' . '/cviebrock/eloquent-sluggable/src/Sluggable.php',
+        'Cviebrock\\EloquentSluggable\\SluggableObserver' => __DIR__ . '/..' . '/cviebrock/eloquent-sluggable/src/SluggableObserver.php',
+        'Cviebrock\\EloquentSluggable\\SluggableScopeHelpers' => __DIR__ . '/..' . '/cviebrock/eloquent-sluggable/src/SluggableScopeHelpers.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
@@ -3578,6 +3621,48 @@ class ComposerStaticInit779cc9c3ded962da78ad61d4fdd45ed8
         'Ramsey\\Uuid\\UuidFactory' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactory.php',
         'Ramsey\\Uuid\\UuidFactoryInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactoryInterface.php',
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\CollapseWhitespace' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/CollapseWhitespace.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\CombineCss' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/CombineCss.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\CombineHeads' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/CombineHeads.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\CombineJavascript' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/CombineJavascript.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\DedupInlinedImages' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/DedupInlinedImages.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\DeferJavascript' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/DeferJavascript.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\ElideAttributes' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/ElideAttributes.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\ExtendCache' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/ExtendCache.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\FallbackRewriteCssUrls' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/FallbackRewriteCssUrls.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\FlattenCssImports' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/FlattenCssImports.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\HintPreloadSubresources' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/HintPreloadSubresources.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\InLineGoogleFontCss' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/InLineGoogleFontCss.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\InLineImportToLink' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/InLineImportToLink.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\InLineJavascript' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/InLineJavascript.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\InLinePreviewImages' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/InLinePreviewImages.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\InlineCss' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/InlineCss.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\InsertDNSPrefetch' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/InsertDNSPrefetch.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\InsertGA' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/InsertGA.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\LazyLoadImages' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/LazyLoadImages.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\LocalStorageCache' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/LocalStorageCache.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\MakeGoogleAnalyticsAsync' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/MakeGoogleAnalyticsAsync.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\MakeShowAdsAsync' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/MakeShowAdsAsync.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\MoveCssAboveScripts' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/MoveCssAboveScripts.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\MoveCssToHead' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/MoveCssToHead.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\OutlineCss' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/OutlineCss.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\OutlineJavascript' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/OutlineJavascript.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\PageSpeed' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/PageSpeed.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\Pedantic' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/Pedantic.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\PrioritizeCriticalCss' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/PrioritizeCriticalCss.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\RemoveComments' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/RemoveComments.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\RemoveQuotes' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/RemoveQuotes.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\ResizeMobileImages' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/ResizeMobileImages.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\ResizeRenderedImageDimensions' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/ResizeRenderedImageDimensions.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\ResponsiveImages' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/ResponsiveImages.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\RewriteCss' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/RewriteCss.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\RewriteImages' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/RewriteImages.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\RewriteJavascript' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/RewriteJavascript.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\RewriteStyleAttributes' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/RewriteStyleAttributes.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\RewriteStyleAttributesWithUrl' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/RewriteStyleAttributesWithUrl.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\SpriteImages' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/SpriteImages.php',
+        'RenatoMarinho\\LaravelPageSpeed\\Middleware\\TrimUrls' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/Middleware/TrimUrls.php',
+        'RenatoMarinho\\LaravelPageSpeed\\ServiceProvider' => __DIR__ . '/..' . '/renatomarinho/laravel-page-speed/src/ServiceProvider.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',
