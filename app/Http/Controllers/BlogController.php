@@ -260,4 +260,33 @@ class BlogController extends Controller
 
         return redirect('/blog')->with('flash_message', 'Blog deleted!');
     }
+    public function publisedList()
+    {
+       $publishedBlogList= blog::where('published','=',1)->orderby('created_at','desc')->paginate(10);
+        return view('publishedBlogList',['bloglists'=>$publishedBlogList,'title'=>'Blog list']);
+    }
+    public function blogPublished(Request $request,$id)
+    {
+        $publishedUpdate = $request->published;
+        // $requestData = $request->all();
+        if($publishedUpdate==1)
+        {
+            $publishedUpdate=0; 
+        }
+        else{
+            $publishedUpdate=1; 
+        }
+        // dd($publishedUpdate);
+        $blogData = blog::findOrFail($id);
+        if($blogData->update(['published'=>$publishedUpdate]))
+        {
+            $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', ' Updated Successfully!');
+        }
+        else{
+            $request->session()->flash('message.level', 'error');
+            $request->session()->flash('message.content', 'There are Some Issue!');
+        }
+        return redirect()->back();
+    }
 }

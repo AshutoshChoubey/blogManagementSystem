@@ -13,13 +13,13 @@
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'BlogController@publisedList')->middleware('blogMinify');
 
 Auth::routes();
 
 Route::middleware('auth')->group(function() {
+    
+    Route::put('/blogPublished/{id}', 'BlogController@blogPublished');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('blog', 'BlogController');
     Route::post('blog/create', 'BlogController@store');

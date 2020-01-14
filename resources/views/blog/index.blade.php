@@ -49,6 +49,13 @@
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete blog" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
+                                            <form method="POST" action="{{ url('/blogPublished' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                                {{ method_field('PUT') }}
+                                                {{ csrf_field() }}
+                                                <input  hidden="true" class="" name="published" type="hidden" value="{{$item->published}}">
+                                                <button onclick="return confirm(&quot;Are you sure to update your post publication?&quot;)" type="submit" class="btn btn-primary"  ><i class="fa {{ $item->published!=1? 'fa-lock' : 'fa-user' }}" aria-hidden="true"></i>{{ $item->published!=1? "private" : "public" }}</button>
+                                            </form>
+                                           
                                         </td>
                                     </tr>
                                 @endforeach

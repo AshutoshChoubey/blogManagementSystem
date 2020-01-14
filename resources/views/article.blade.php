@@ -2,6 +2,7 @@
 
 @section('head')
     <meta name="keywords" content="{{ $keywords }}" />
+    <meta name="date" content="{{ $created_at }}" scheme="YYYY-MM-DD">
     <meta name="description" content="{{ $description }}" />
     <meta name="subject" content="{{ $description }}">
     <meta name="author" content="{{ $author }}">
@@ -25,7 +26,7 @@
     <div class="col-sm-2">&nbsp;</div>
     <div class="col-sm-8">
         <div class="card">
-            <div class="card-header"><h1>{{ $title }}</h1></div>
+            <div class="card-header"><h3>{{ $title }}</h3></div>
             <div class="card-body">
            
                 @if(isset($photo))

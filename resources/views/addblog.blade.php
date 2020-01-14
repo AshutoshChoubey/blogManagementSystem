@@ -37,7 +37,8 @@
             
              {{ csrf_field() }}
                 <div class="card">
-                    <div class="card-header text-center">Add Your Blog</div>
+                    <div class="card-header text-center">
+                      {{ isset($id)?"Update Your Blog":"Add Your Blog"}}</div>
 
                     <div class="card-body">
                     
